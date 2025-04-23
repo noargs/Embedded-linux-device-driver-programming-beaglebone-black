@@ -1,6 +1,6 @@
 # Embedded linux device driver programming   
 
-### Install packages on the host (Ubuntu)    
+## Host (Ubuntu) preparation   
 ```bash
 $ sudo apt-get update 
 
@@ -22,10 +22,11 @@ $ wget https://releases.linaro.org/components/toolchain/binaries/7.5-2019.12/arm
 
 $ mkdir -p ~/workspace && mv gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf.tar.xz ~/workspace && cd ~/workspace
 
-workspace$ tar Jxf gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf.tar.xz   
-    
-workspace$ export PATH=PATH:$(pwd)/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf.tar.xz    
-```      
+workspace$ tar Jxf gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf.tar.xz     
+```    
+
+Add an entry into ~/.bashrc file to export the toolchain and to make it available in the terminal.    
+`export PATH=$PATH:<path_to_toolchain_binaries OR ~/workspace/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf/bin>`    
     
 ### Getting your board ready    
 We will create two partition on the SD Card as follows (images for `MLO`, `u-boot.img` and kernel image `uImage`, device tree `am335-boneblack.dtb` as well as environment variable file `uEnv.txt` are placed in the repo under [pre-built-images](./pre-built-images/) directory) download and place it into your **workspace** directory       
@@ -43,7 +44,19 @@ workspace$ wget https://files.beagle.cc/file/beagleboard-public-2021/images/am33
 workspace$ tar Jxf am335x-debian-12.2-iot-armhf-2023-10-07-4gb.img.xz
 ```  
 
-> Now your workspace directory should contain **pre-buil-images**, Debian release **am335x-debian-12.2-iot-armhf-2023-10-07-4gb** as well as cross compiler tool chain from Linaro **gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf**             
+> Now your workspace directory should contain **pre-buil-images**, Debian release **am335x-debian-12.2-iot-armhf-2023-10-07-4gb** as well as cross compiler tool chain from Linaro **gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf**     
+
+Download **GParted Partition Editor** from Ubuntu *App Center* to format your SD Card      
+
+## Target preparetion (Beaglebone black)      
+
+Official website for [Beaglebone black](https://www.beagleboard.org/boards/beaglebone-black).  
+    
+[Design](https://git.beagleboard.org/beagleboard/beaglebone-black) contain Beaglebone black **Schematic** and **Reference Manual** in *Docs* folder of this repository.  
+
+Go to [wiki](https://elinux.org/Main_Page) and find your board BeagleBone Black for ton of information)   
+
+![Board components](./images/board_components.png)             
     
  
     
