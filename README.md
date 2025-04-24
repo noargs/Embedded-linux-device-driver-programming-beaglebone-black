@@ -271,7 +271,7 @@ linux_bbb_6.1$ sudo make ARCH=arm modules_install
      
 ### Update kernel image and kernel modules in SD card    
     
-- Copy `uImage` from the host pc `arch/arm/boot/` into the microSD card's `BOOT` partition. Similarly `am335x-boneblack.dtb` from the host pc `arch/arm/boot/dts/` and into microSD cards's `BOOT` partition and then update the boot partition of the SD card     
+- Copy `uImage` from the host pc `arch/arm/boot/` into the microSD card's `BOOT` partition. Similarly `am335x-boneblack.dtb` from the host pc `arch/arm/boot/dts/` and into microSD cards's `BOOT` partition.   
 - Copy content of newly installed **6.1.83** folder in host pc (`/lib/modules/`) to board's `/lib/modules/` folder.    
 ```bash
 pc@ubuntu:/lib/modules$ sudo cp -a 6.1.83 /media/<ubuntu-username>/ROOTFS/lib/modules
@@ -319,16 +319,16 @@ Above error *Temporary failure in name resolution* means we have to set DNS serv
   - nameserver 8.8.8.8
   - nameserver 8.8.4.4          
 
-Add default gateway address by running the command below.    
+Add default gateway address by running the command below in the **BBB**.    
 > [!IMPORTANT]  
-> You have to run following command everytime you reboot your device  
+> You have to run following command in the **BBB** everytime you reboot your device  
 ```bash
 # using PC as a default gateway
 debian@BeagleBone:~$ route add default gw 192.168.7.1 
 ```      
 
 > [!IMPORTANT]  
-> In Host you must make sure that IP packet forwarding is enabled and also you have to run following command(s) on device reboot   
+> In Host you must make sure that IP packet forwarding is enabled and also you have to run following command(s) in the **Host machine** on device (BBB) reboot   
 ```bash
 # search for `net.ipv4.ip_forward=1` in `/etc/sysctl.conf`
 pc@ubuntu:$ sudo nano /etc/sysctl.conf   
@@ -339,14 +339,20 @@ pc@ubuntu:$ iptables --table nat --append POSTROUTING --out-interface wlp2s0 -j 
 pc@ubuntu:$ iptables --append FORWARD --in-interface wlp2s0 -j ACCEPT
 pc@ubuntu:$ echo 1 > /proc/sys/net/ipv4/ip_forward
 ```       
-OR save the following script in the HOST PC with, for example `usbnet.sh` name, and change the permission with `chmod +x usbnet.sh` so to easier to run in one go after reboot Beaglebone black. **Dont forget to replace `wlp2s0` with your network interface buy running `ifconfig`**    
+OR save the following script in the HOST PC with, for example `usbnet.sh` name, and change the permission with `chmod +x usbnet.sh` so to easier to run in one go after reboot Beaglebone black. **Dont forget to replace `ens33` with your network interface by running `ifconfig`**    
 ```bash
 #!/bin/bash
-iptables --table nat --append POSTROUTING --out-interface wlp2s0 -j MASQUERADE
-iptables --append FORWARD --in-interface wlp2s0 -j ACCEPT
+iptables --table nat --append POSTROUTING --out-interface ens33 -j MASQUERADE
+iptables --append FORWARD --in-interface ens33 -j ACCEPT
 echo 1 > /proc/sys/net/ipv4/ip_forward
 ```    
 
+Now you can ping `www.google.com` and update the system
+```bash
+debian@BeagleBone:~$ ping www.google.com
+
+debian@BeagleBone:~$ sudo apt-get update
+```
 
     
 
