@@ -1,0 +1,8 @@
+build/
+*.sysvers
+*.order
+*.mod.*
+*.mod
+*.o
+*.ko
+ 
