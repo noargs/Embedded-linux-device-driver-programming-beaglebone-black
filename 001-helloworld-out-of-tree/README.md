@@ -21,9 +21,9 @@
 
 ### User space Vs Kernel space   
 
-<img src="images/u-k-general.png" alt="User space Vs Kernel space">     
+<img src="../images/u-k-general.png" alt="User space Vs Kernel space">     
 
-<img src="images/u-k-linux.png" alt="Linux User space Vs Kernel space">     
+<img src="../images/u-k-linux.png" alt="Linux User space Vs Kernel space">     
 
 ### LKM writing syntax   
 ```c
@@ -52,7 +52,7 @@ MODULE_LICENSE("GPL");
 MODULE_AUTHON("Ibn noargs")
 MODULE_DESCRIPTION("A kernel module to print some messages");
 ```        
-<img src="images/lkm_structure.png" alt="LKM structure">      
+<img src="../images/lkm_structure.png" alt="LKM structure">      
      
 > [!IMPORTANT]   
 > Every kernel module should include this header `#include <linux/module.h>`    
