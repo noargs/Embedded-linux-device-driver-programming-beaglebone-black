@@ -169,3 +169,26 @@ help:
 host:
 	make -C $(HOST_KERN_DIR) M=$(PWD) modules	
 ```    
+      
+### In-tree building  
+- You have to add the Linux kernel module inside the Linux kernel source tree and let the Linux build system builds that.    
+- If you want to list your kernel module selection in kernel **menuconfig**, then create and use a Kconfig file      
+
+### Step to add in-tree module to kernel menu configuration   
+
+1. Create a folder in linux tree drivers/char/my_c_dev  
+2. Copy `main.c`  
+3. Create Kconfig file and add the below entries   
+```kconfig
+menu "my custom modules"
+  config CUSTOM_HELLOWORLD
+    tristate "hello world module support"
+    default m
+endmenu
+```        
+4. Add the local Kconfig entry to upper level Kconfig    
+5. Create a local Makefile   
+6. Add `obj-$(config_item) += <module>.o` in to local Makefile    
+7. Add the local level Makefile to higher level Makefile     
+
+> [Referance](https://www.kernel.org/doc/Documentation/kbuild/kconfig-language.txt) 
