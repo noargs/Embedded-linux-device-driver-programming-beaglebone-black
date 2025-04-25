@@ -1,8 +1,11 @@
 build/
-*.sysvers
+*.symvers
 *.order
 *.mod.*
 *.mod
 *.o
 *.ko
+.main.**
+.modules.**
+.Module.**
  
