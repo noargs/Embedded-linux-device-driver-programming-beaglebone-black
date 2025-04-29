@@ -42,8 +42,7 @@ endmenu
 
 ```
 8. Create a local Makefile   
-9. Add `obj-$(config_item) += <module>.o` in to local Makefile 
-**my_c_dev Makefile**     
+9. Add `obj-$(config_item) += <module>.o` into local Makefile **my_c_dev/Makefile**     
 ```Makefile
 # Prefix your Kconfig `CUSTOM_HELLOWORLD` identifier with `CONFIG_` keyword to get the option `m`, `n`, or `y` from user
 obj-$(CONFIG_CUSTOM_HELLOWORLD) += main.o
@@ -67,7 +66,7 @@ At the top level directory where linux is placed
 pc@ubuntu:~..linux_bbb_6.1$ make ARCH=arm menuconfig
 ```    
 - Go to **Device drivers** > **Character devices** > **ibn custom modules**   
-- **ibn custom modules** is our module. You can go inside and see it's not selected by default (as we gave `n` previously to menuconfig).    
+- **ibn custom modules** is our module. You can go inside and see it's not selected by default (as we gave `n` previously to module `my_c_dev`'s Kconfig).    
 - Selecting **<Help\>** will show following screen.     
 
 <img src="../images/menuconfig-help-for-our-custom-module.png" alt="Menuconfig help menu for our custom module">     
