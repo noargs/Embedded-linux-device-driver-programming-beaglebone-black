@@ -1,0 +1,11 @@
+build/
+*.symvers
+*.order
+*.mod.*
+*.mod
+*.o
+*.ko
+.main.**
+.modules.**
+.Module.**
+ 
